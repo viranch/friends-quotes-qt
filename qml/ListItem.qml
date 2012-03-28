@@ -17,7 +17,7 @@ Item {
         anchors {
             top: header.bottom; topMargin: 5
             left: parent.left
-            right: parent.right //scrollBar.visible ? scrollBar.left : parent.right
+            right: parent.right
             bottom: parent.bottom
         }
         boundsBehavior: Flickable.StopAtBounds
@@ -40,13 +40,14 @@ Item {
         }
     }
 
-    /*Components.ScrollBar {
+    ScrollBar {
         id: scrollBar
-        flickableItem: flickableContent
+        scrollArea: flickableContent
+        width: 8
         anchors {
             right: parent.right
-            top: flickableItem.top
-            bottom: flickableItem.bottom
+            top: scrollArea.top
+            bottom: scrollArea.bottom
         }
-    }*/
+    }
 }

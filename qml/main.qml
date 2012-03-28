@@ -1,7 +1,7 @@
 import QtQuick 1.1
 
 Item {
-    id: applet
+    id: rootItem
     width: 470
     height: 200
 
@@ -77,12 +77,6 @@ Item {
         }
         
         Component.onCompleted: currentIndex = 0
-    }
-
-
-    MouseArea {
-        anchors.fill: parent
-        onClicked: print("click");
     }
 
     ButtonBar {

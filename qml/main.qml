@@ -59,11 +59,8 @@ Item {
     ListView {
         id: ticker
         anchors {
-            top: parent.top
-            bottom: parent.bottom
-            bottomMargin: 5
-            left: parent.left
-            right: parent.right
+            fill: parent
+            margins: 10
         }
         model: 0
         clip: true
@@ -88,7 +85,7 @@ Item {
         onClicked: print("click");
     }
 
-    /*ButtonBar {
+    ButtonBar {
         id: buttonBar
         anchors {
             horizontalCenter: parent.horizontalCenter
@@ -103,5 +100,5 @@ Item {
             else if (direction<0 && ticker.currentIndex>0) ticker.currentIndex--;
             tickTimer.restart();
         }
-    }*/
+    }
 }

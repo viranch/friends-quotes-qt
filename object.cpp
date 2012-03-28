@@ -4,10 +4,10 @@
 Object::Object(QObject *parent) :
     QObject(parent)
 {
-    tray = new QSystemTrayIcon(QIcon("qml/images/face-laugh.png"), this);
+    tray = new QSystemTrayIcon(QIcon(":/qml/images/face-smile-big.png"), this);
     tray->show();
 
-    view = new QDeclarativeView(QUrl::fromLocalFile("qml/main.qml"));
+    view = new QDeclarativeView(QUrl("qrc:/qml/main.qml"));
     view->setResizeMode(QDeclarativeView::SizeViewToRootObject);
     view->setWindowFlags(Qt::FramelessWindowHint | Qt::Tool);
     view->setWindowOpacity(0.7);

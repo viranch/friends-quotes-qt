@@ -1,17 +1,18 @@
 import QtQuick 1.1
-import org.kde.plasma.components 0.1 as Components
 
 MouseArea {
-    width: buttons.width
-    height: buttons.height
+    width: buttons.width+5
+    height: buttons.height+3
     hoverEnabled: true
 
     signal leftClicked()
     signal rightClicked()
 
-    Components.Highlight {
+    Rectangle {
         anchors.fill: parent
-        opacity: parent.containsMouse
+        color: "white"
+        radius: 5
+        opacity: parent.containsMouse ? 0.3 : 0
         Behavior on opacity { NumberAnimation { duration: 200 } }
     }
 
@@ -19,15 +20,22 @@ MouseArea {
         id: buttons
         spacing: 2
         opacity: parent.containsMouse
+        anchors.centerIn: parent
         
-        Components.ToolButton {
-            iconSource: "arrow-left"
-            onClicked: leftClicked()
+        Image {
+            source: "images/arrow-left.png"
+            MouseArea {
+                anchors.fill: parent
+                onClicked: leftClicked()
+            }
         }
         
-        Components.ToolButton {
-            iconSource: "arrow-right"
-            onClicked: rightClicked()
+        Image {
+            source: "images/arrow-right.png"
+            MouseArea {
+                anchors.fill: parent
+                onClicked: rightClicked()
+            }
         }
         
         Behavior on opacity { NumberAnimation { duration: 200 } }

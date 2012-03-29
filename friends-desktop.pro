@@ -7,9 +7,6 @@ TARGET =
 DEPENDPATH += . qml
 INCLUDEPATH += .
 QT += core gui declarative xml
-qml.source = qml
-qml.target =
-DEPLOYMENTFOLDERS += qml
 
 # Input
 SOURCES += main.cpp object.cpp

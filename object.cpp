@@ -30,15 +30,26 @@ void Object::toggleMe(QSystemTrayIcon::ActivationReason reason)
 {
     if (reason != QSystemTrayIcon::Trigger) return;
 
-    if (view->isVisible()) view->hide();
+    if (view->isVisible()) {
+        if (view->isActiveWindow())
+            view->hide();
+        else {
+            view->activateWindow();
+            view->raise();
+            view->move(pos);
+        }
+    }
     else {
         view->show();
+        view->raise();
         view->move(pos);
     }
 }
 
 void Object::showMe()
 {
-    view->hide();
-    QTimer::singleShot(500, this, SLOT(toggleMe()));
+    if (!view->isVisible()) view->show();
+    view->activateWindow();
+    view->raise();
+    view->move(pos);
 }

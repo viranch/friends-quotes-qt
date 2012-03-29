@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QSystemTrayIcon>
+#include <QPoint>
 
 class QDeclarativeView;
 
@@ -14,11 +15,13 @@ public:
     Object(QObject *parent = 0);
 
 private slots:
-    void toggleMe(QSystemTrayIcon::ActivationReason);
+    void toggleMe(QSystemTrayIcon::ActivationReason reason = QSystemTrayIcon::Trigger);
+    void showMe();
     
 private:
     QSystemTrayIcon *tray;
     QDeclarativeView *view;
+    QPoint pos;
 
 };
 

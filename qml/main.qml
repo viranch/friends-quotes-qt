@@ -5,6 +5,8 @@ Item {
     width: 470
     height: 200
 
+    signal updated()
+
     property int tickInterval: 5 // in minutes
 
     function setTickInterval(interval) {
@@ -34,7 +36,10 @@ Item {
     Timer {
         id: tickTimer
         interval: tickInterval*60000; running: true; repeat: true
-        onTriggered: ticker.currentIndex = (ticker.currentIndex+1)%xmlModel.count;
+        onTriggered: {
+            buttonBar.rightClicked();
+            updated();
+        }
     }
 
     function randomize(count) {

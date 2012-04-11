@@ -6,7 +6,7 @@ TEMPLATE = app
 TARGET = 
 DEPENDPATH += . qml
 INCLUDEPATH += .
-QT += core gui declarative xml
+QT += declarative
 
 # Input
 SOURCES += main.cpp object.cpp

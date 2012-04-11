@@ -4,17 +4,22 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QTimer>
+#include <QMenu>
 
 Object::Object(QObject *parent) :
     QObject(parent)
 {
-    tray = new QSystemTrayIcon(QIcon(":/qml/images/face-smile-big.png"), this);
-    tray->show();
-
     view = new QDeclarativeView(QUrl("qrc:/qml/main.qml"));
     view->setResizeMode(QDeclarativeView::SizeViewToRootObject);
     view->setWindowFlags(Qt::FramelessWindowHint | Qt::Tool);
+    view->setAttribute(Qt::WA_QuitOnClose);
     view->setWindowOpacity(0.7);
+
+    tray = new QSystemTrayIcon(QIcon(":/qml/images/face-smile-big.png"), this);
+    QMenu *trayMenu = new QMenu();
+    trayMenu->addAction(QIcon(":/qml/images/application-exit.png"), "Quit", view, SLOT(close()));
+    tray->setContextMenu(trayMenu);
+    tray->show();
 
     connect(tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(toggleMe(QSystemTrayIcon::ActivationReason)));
     connect(qobject_cast<QObject*>(view->rootObject()), SIGNAL(updated()), this, SLOT(showMe()));
@@ -30,25 +35,15 @@ void Object::toggleMe(QSystemTrayIcon::ActivationReason reason)
 {
     if (reason != QSystemTrayIcon::Trigger) return;
 
-    if (view->isVisible()) {
-        if (view->isActiveWindow())
-            view->hide();
-        else {
-            view->activateWindow();
-            view->raise();
-            view->move(pos);
-        }
-    }
-    else {
-        view->show();
-        view->raise();
-        view->move(pos);
-    }
+    if (view->isVisible() && view->isActiveWindow())
+        view->hide();
+    else
+        showMe();
 }
 
 void Object::showMe()
 {
-    if (!view->isVisible()) view->show();
+    view->show();
     view->activateWindow();
     view->raise();
     view->move(pos);

@@ -9,5 +9,6 @@
         <file>qml/images/arrow-left.png</file>
         <file>qml/images/arrow-right.png</file>
         <file>qml/images/scrollbar.png</file>
+        <file>qml/images/application-exit.png</file>
     </qresource>
 </RCC>
